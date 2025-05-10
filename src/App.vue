@@ -1,47 +1,58 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref, onMounted } from 'vue'
+
+const images = ref([])
+
+onMounted(() => {
+  const saved = JSON.parse(localStorage.getItem('photos') || '[]')
+  images.value = saved
+})
+
+function handleFiles(files) {
+  [...files].forEach(file => {
+    const reader = new FileReader()
+    reader.onload = e => {
+      images.value.push(e.target.result)
+      localStorage.setItem('photos', JSON.stringify(images.value))
+    }
+    reader.readAsDataURL(file)
+  })
+}
+
+function onDrop(e) {
+  e.preventDefault()
+  if (e.dataTransfer.files && e.dataTransfer.files.length) {
+    handleFiles(e.dataTransfer.files)
+  }
+}
+
+function onChange(e) {
+  if (e.target.files && e.target.files.length) {
+    handleFiles(e.target.files)
+    e.target.value = ''
+  }
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="min-h-screen bg-gray-100 flex flex-col items-center p-6">
+    <h1 class="text-3xl font-semibold mb-6">SSTV Photo Uploader</h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <label
+      @dragover.prevent
+      @drop="onDrop"
+      class="w-full max-w-xl h-48 flex flex-col items-center justify-center border-4 border-dashed border-gray-400 rounded-2xl bg-white cursor-pointer hover:bg-gray-50 transition">
+      <span class="text-gray-600">Drag & Drop photos here or click to select</span>
+      <input type="file" accept="image/*" multiple class="hidden" @change="onChange">
+    </label>
+
+    <div v-if="images.length" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-8 w-full max-w-4xl " >
+      <div v-for="(src, idx) in images" :key="idx" class="relative group">
+        <img :src="src" alt="uploaded" class="object-cover w-full h-40 rounded-xl shadow">
+      </div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
