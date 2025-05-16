@@ -1,29 +1,21 @@
-# sstv
+# SSTV Photo Uploader 
 
-This template should help get you started developing with Vue 3 in Vite.
+**Web Prog Lab 6**: Drag-and-drop a photo, pick an SSTV mode, and your browser will transmit the picture as slow-scan television audio
 
-## Recommended IDE Setup
+*Built with Vue.js using local storage*
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Quickstart
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```shell
 npm install
+npm run dev 
 ```
 
-### Compile and Hot-Reload for Development
+## Try live
 
-```sh
-npm run dev
-```
+Hosted at [GitHub Pages](https://niksays.github.io/tum-web-lab6/)
 
-### Compile and Minify for Production
+---
 
-```sh
-npm run build
-```
+(c) Nejintev Nicolai. 
+SSTV library (c) Christian Kegel.
