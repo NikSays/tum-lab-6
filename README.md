@@ -18,4 +18,5 @@ Hosted at [GitHub Pages](https://niksays.github.io/tum-web-lab6/)
 ---
 
 (c) Nejintev Nicolai. 
+
 SSTV library (c) Christian Kegel.
