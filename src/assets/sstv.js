@@ -217,7 +217,7 @@ class MartinBase extends Format {
 	}
 }
 
-class MartinMOne extends MartinBase {
+export class MartinMOne extends MartinBase {
 	constructor() {
 		let numScanLines = 256;
 		let vertResolution = 320;
@@ -229,6 +229,7 @@ class MartinMOne extends MartinBase {
 		super(numScanLines, vertResolution, blankingInterval, scanLineLength, syncPulseLength, VISCode);
 	}
 }
+
 class PDBase extends Format {
 	prepareImage(data) {
 		let preparedImage = [];
@@ -284,7 +285,8 @@ class PDBase extends Format {
 		return (super.numScanLines * (super.syncPulseLength + super.blankingInterval + super.scanLineLength * 4));
 	}
 }
-class PD50 extends PDBase {
+
+export class PD50 extends PDBase {
 	constructor() {
 		let numScanLines = 256;
 		let vertResolution = 320;
@@ -296,4 +298,4 @@ class PD50 extends PDBase {
 		super(numScanLines, vertResolution, blankingInterval, scanLineLength, syncPulseLength, VISCode);
 	}
 }
-export default PD50;
+
