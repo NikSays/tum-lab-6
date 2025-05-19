@@ -5,12 +5,20 @@ import {MartinMOne, PD50} from './assets/sstv.js'
 const images = ref([])
 const currentOsc = ref(null)
 const mode = ref('Martin M1')
+const dark = ref(false)
+
+// Themes
+
+function toggleTheme () {
+  dark.value = !dark.value
+  document.documentElement.classList.toggle('dark', dark.value)
+}
+
+// File handling
 
 onMounted(() => {
   images.value = JSON.parse(localStorage.getItem('photos') || '[]')
 })
-
-// File handling
 
 function persist() {
   localStorage.setItem('photos', JSON.stringify(images.value))
@@ -93,8 +101,16 @@ function stopPlayback(){
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100 flex flex-col items-center p-6">
-    <h1 class="text-3xl font-semibold mb-6">SSTV Photo Uploader</h1>
+  <div class="min-h-screen bg-gray-100 flex flex-col items-center p-6 dark:bg-gray-900 transition-colors">
+    <button
+      @click="toggleTheme"
+      class="self-end mb-4 text-2xl select-none">
+      {{ dark ? '🌞' : '🌙' }}
+    </button>
+
+    <h1 class="text-3xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
+      SSTV Photo Uploader
+    </h1>
 
     <!-- Upload -->
     <label @dragover.prevent @drop="onDrop"
@@ -114,7 +130,7 @@ function stopPlayback(){
     <!-- Gallery -->
     <div v-if="images.length" class="grid grid-cols-3 md:grid-cols-4 gap-4 mt-8 w-full">
       <div v-for="(src, idx) in images" :key="idx" class="relative group">
-        <img :src="src" alt="uploaded" class="object-cover w-full h-40 rounded-xl shadow cursor-pointer" @click="playSSTV(src)">
+        <img :src="src" class="object-cover w-full h-40 rounded-xl shadow cursor-pointer" @click="playSSTV(src)">
         <!-- Delete button -->
         <button @click="remove(idx)"
           class="absolute top-2 right-2 bg-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition">
