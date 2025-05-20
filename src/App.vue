@@ -112,6 +112,22 @@ function stopPlayback(){
       SSTV Photo Uploader
     </h1>
 
+    <!-- SSTV Intro -->
+        <div class="mb-6 max-w-2xl text-center text-sm text-gray-700 dark:text-gray-300 flex flex-col gap-1">
+          <p>
+            <a href="https://en.wikipedia.org/wiki/Slow-scan_television" class="underline hover:text-blue-500">Slow-scan television (SSTV)</a>
+            is a picture transmission method, used by amateur radio operators, <br> to transmit and receive static pictures via radio.
+          </p>
+          <div class="flex justify-around">
+            <a href="https://play.google.com/store/apps/details?id=xdsopl.robot36&hl=en" class="underline hover:text-blue-500">
+              Android Decoder
+            </a> 
+            <a href="https://apps.apple.com/us/app/sstv-slow-scan-tv/id387910013" class="underline hover:text-blue-500">
+              iOS Decoder (paid)
+            </a>
+          </div>
+        </div>
+
     <!-- Upload -->
     <label @dragover.prevent @drop="onDrop"
       class="w-xl h-48 flex flex-col items-center justify-center
